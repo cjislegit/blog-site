@@ -1,8 +1,19 @@
-export default function PostPage() {
-  const post = {
-    title: 'Sample Post Title',
-    body: 'This is a sample post body. It contains some text to represent the content of the post.',
-  };
+import { db } from '../../../prisma/db';
+import { notFound } from 'next/navigation';
+
+export default async function PostPage({ params }) {
+  const { id } = await params;
+  const postId = Number(id); //Turns it into a number instead of a string
+
+  if (!Number.isSafeInteger(postId) || postId < 1) {
+    notFound();
+  }
+
+  const post = await db.orm.public.Post.first({ id: postId });
+
+  if (!post.id) {
+    notFound();
+  }
 
   return (
     <article className='space-y6'>

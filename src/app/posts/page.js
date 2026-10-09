@@ -1,8 +1,11 @@
 import Link from 'next/link';
+import { db } from '../../prisma/db';
+
+export const dynamic = 'force-dynamic';
 
 export default async function PostsPage() {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const posts = await response.json();
+  const posts = await db.orm.public.Post.all();
 
   return (
     <div className='space-y-8'>

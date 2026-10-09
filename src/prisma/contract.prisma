@@ -1,0 +1,11 @@
+// use prisma-8
+// Printed from prisma/schema.prisma by `prisma contract print`.
+
+namespace public {
+  model Post {
+    id     Int    @id @default(autoincrement())
+    userId Int
+    title  String
+    body   String
+  }
+}
