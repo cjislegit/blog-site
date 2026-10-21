@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { db } from '../../prisma/db';
 import RecentlyViewedPosts from '../../components/recently-viewed-posts';
 import { Suspense } from 'react';
+import { getPosts } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 
 export default async function PostsPage() {
   // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const posts = await db.orm.public.Post.all();
+  const posts = await getPosts();
 
   return (
     <div className='space-y-8'>
