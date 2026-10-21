@@ -50,3 +50,10 @@ dist/
 
 # Build output
 /dist/
+
+# Agent folders
+/.agents/
+/.claude/
+/.cursor/
+/.devin/
+/.windsurf/
