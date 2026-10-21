@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { db } from '../../prisma/db';
+import RecentlyViewedPosts from '../../components/recently-viewed-posts';
+import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
 
 export default async function PostsPage() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
   const posts = await db.orm.public.Post.all();
 
   return (
@@ -28,6 +30,10 @@ export default async function PostsPage() {
             </li>
           ))}
         </ul>
+
+        <Suspense fallback={<div>Loading recently viewed posts...</div>}>
+          <RecentlyViewedPosts />
+        </Suspense>
       </section>
     </div>
   );
